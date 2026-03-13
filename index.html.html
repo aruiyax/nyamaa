@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nya'maa Meats – Delectable Maa Country Meat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D81E05;
+    --red-dark: #A51503;
+    --red-light: #FDECEA;
+    --blue: #0D3B8C;
+    --blue-mid: #1A56C4;
+    --blue-light: #E8F0FC;
+    --black: #0E0E0E;
+    --off-black: #1C1C1C;
+    --white: #FFFFFF;
+    --off-white: #F8F6F3;
+    --gray: #6B6B6B;
+    --gray-light: #EBEBEB;
+    --font-display: 'Oswald', sans-serif;
+    --font-serif: 'Source Serif 4', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+  /* ---- LOGO SVG ---- */
+  .logo-mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-svg { width: 38px; height: 38px; flex-shrink: 0; }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 0.06em; line-height: 1; }
+  .logo-name .nya { color: var(--black); }
+  .logo-name .maa { color: var(--red); }
+  .logo-tagline { font-size: 9px; letter-spacing: 0.14em; color: var(--gray); text-transform: uppercase; margin-top: 2px; }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--black);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    border-bottom: 3px solid var(--red);
+  }
+  nav .logo-name .nya { color: var(--white); }
+  nav .logo-tagline { color: rgba(255,255,255,0.45); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { display: flex; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 4px; font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: all 0.15s; }
+  .btn-red { background: var(--red); color: var(--white); }
+  .btn-red:hover { background: var(--red-dark); }
+  .btn-blue { background: var(--blue); color: var(--white); }
+  .btn-blue:hover { background: var(--blue-mid); }
+  .btn-outline-white { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); }
+  .btn-outline-white:hover { border-color: var(--white); color: var(--white); }
+  .btn-outline-red { background: transparent; color: var(--red); border: 1.5px solid var(--red); }
+  .btn-outline-red:hover { background: var(--red); color: var(--white); }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 40px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 60px,
+      rgba(216,30,5,0.025) 60px,
+      rgba(216,30,5,0.025) 61px
+    );
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--red); color: var(--white);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 2px; margin-bottom: 20px;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.8); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 .accent { color: var(--red); }
+  .hero h1 .accent-blue { color: #5B8FE8; }
+  .hero-desc { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.68); max-width: 480px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-stats { display: flex; gap: 32px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-item { }
+  .stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
+  .stat-num span { color: var(--red); }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+  /* TRACE CARD */
+  .trace-card {
+    background: var(--off-black);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-top: 3px solid var(--blue-mid);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .trace-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .trace-card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .live-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #4ADE80; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; animation: pulse 1.5s infinite; }
+  .batch-code {
+    font-family: 'Courier New', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.15em;
+    background: rgba(255,255,255,0.05);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px dashed rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .batch-code:hover { background: rgba(255,255,255,0.08); }
+  .batch-hint { font-size: 10px; color: rgba(255,255,255,0.3); font-family: var(--font-body); font-weight: 400; letter-spacing: normal; }
+  .trace-timeline { display: flex; flex-direction: column; gap: 0; }
+  .trace-step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; }
+  .trace-step:not(:last-child) { padding-bottom: 14px; }
+  .trace-step-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0; position: relative;
+  }
+  .trace-step:not(:last-child) .trace-step-icon::after {
+    content: '';
+    position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 14px;
+    background: rgba(255,255,255,0.12);
+  }
+  .step-done-icon { background: rgba(74,222,128,0.15); color: #4ADE80; }
+  .trace-step-body { }
+  .trace-step-title { font-size: 13px; font-weight: 500; color: var(--white); }
+  .trace-step-meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  /* ---- COLD CHAIN BAR ---- */
+  .coldchain-bar {
+    background: var(--blue);
+    color: var(--white);
+    padding: 18px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .coldchain-journey { display: flex; align-items: center; gap: 0; }
+  .cj-step { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 16px; font-size: 11px; color: rgba(255,255,255,0.7); text-align: center; }
+  .cj-step .cj-icon { font-size: 20px; }
+  .cj-arrow { color: rgba(255,255,255,0.3); font-size: 14px; }
+  .coldchain-promise { font-size: 13px; color: rgba(255,255,255,0.8); max-width: 340px; line-height: 1.5; }
+  .coldchain-promise strong { color: var(--white); }
+  .temp-badge { background: rgba(255,255,255,0.15); color: var(--white); padding: 8px 16px; border-radius: 4px; font-family: var(--font-display); font-size: 18px; font-weight: 700; white-space: nowrap; }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 72px 80px; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: var(--red); margin-bottom: 8px; }
+  .section-title { font-family: var(--font-display); font-size: 38px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1; margin-bottom: 10px; }
+  .section-title .blue { color: var(--blue); }
+  .section-sub { font-size: 15px; color: var(--gray); line-height: 1.7; max-width: 540px; margin-bottom: 40px; }
+
+  /* FEATURES */
+  .features-section { background: var(--off-white); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feat-card {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 6px;
+    padding: 28px 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .feat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .feat-card:hover::before { transform: scaleX(1); }
+  .feat-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .feat-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .feat-card h3 { font-family: var(--font-display); font-size: 18px; font-weight: 500; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.04em; }
+  .feat-card p { font-size: 13px; color: var(--gray); line-height: 1.65; }
+  .feat-badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 2px; margin-top: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-green { background: #ECFDF5; color: #059669; }
+
+  /* GRILL BUILDER */
+  .grill-section { background: var(--black); color: var(--white); }
+  .grill-section .section-title { color: var(--white); }
+  .grill-section .section-sub { color: rgba(255,255,255,0.55); }
+  .grill-grid { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+  .grill-group-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; font-weight: 500; }
+  .grill-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .chip {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px; padding: 9px 16px; font-size: 13px; cursor: pointer;
+    color: rgba(255,255,255,0.7); font-family: var(--font-body); transition: all 0.15s; user-select: none;
+  }
+  .chip:hover:not(.active) { background: rgba(255,255,255,0.1); color: var(--white); }
+  .chip.active { background: var(--red); border-color: var(--red); color: var(--white); }
+  .chip.active-blue { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .grill-summary-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+    border-top: 3px solid var(--red); border-radius: 6px; padding: 24px; position: sticky; top: 80px;
+  }
+  .gs-title { font-family: var(--font-display); font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .gs-line { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); }
+  .gs-line strong { color: var(--white); font-weight: 500; }
+  .gs-total { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; margin-top: 4px; }
+  .gs-total-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .gs-total-price { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); }
+
+  /* FRESHNESS */
+  .fresh-section { background: var(--white); }
+  .fresh-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .fresh-card {
+    background: var(--off-white); border: 1px solid var(--gray-light);
+    border-radius: 6px; padding: 18px 14px;
+  }
+  .fresh-card h4 { font-weight: 500; font-size: 14px; margin-bottom: 12px; }
+  .fresh-bar-bg { height: 6px; background: var(--gray-light); border-radius: 6px; overflow: hidden; margin-bottom: 6px; }
+  .fresh-bar { height: 100%; border-radius: 6px; transition: width 0.6s; }
+  .pct-green { color: #059669; font-size: 12px; font-weight: 500; }
+  .pct-amber { color: #D97706; font-size: 12px; font-weight: 500; }
+  .fresh-date { font-size: 11px; color: var(--gray); margin-top: 4px; }
+  .status-pill { display: inline-block; font-size: 10px; padding: 3px 9px; border-radius: 2px; margin-top: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+  .pill-green { background: #ECFDF5; color: #059669; }
+  .pill-amber { background: #FFFBEB; color: #D97706; }
+  .fresh-outlet-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .outlet-select {
+    background: var(--white); border: 1px solid var(--gray-light);
+    border-radius: 4px; padding: 9px 14px; font-size: 13px;
+    font-family: var(--font-body); color: var(--black); cursor: pointer;
+  }
+
+  /* CHEF BOOKING */
+  .chef-section { background: var(--blue); color: var(--white); }
+  .chef-section .section-title { color: var(--white); }
+  .chef-section .section-eyebrow { color: rgba(255,255,255,0.6); }
+  .chef-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .chef-perks { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .chef-perk { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+  .perk-icon { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+  .chef-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px; font-weight: 500; }
+  .form-input {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px; padding: 11px 14px; font-size: 13px;
+    font-family: var(--font-body); color: var(--white); width: 100%; outline: none;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-input:focus { border-color: rgba(255,255,255,0.5); }
+  .form-input option { background: var(--blue-mid); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* OUTLETS */
+  .outlets-section { background: var(--off-white); }
+  .outlet-search { display: flex; gap: 10px; margin-bottom: 28px; max-width: 480px; }
+  .outlet-search input {
+    flex: 1; background: var(--white); border: 1px solid var(--gray-light);
+    border-radius: 4px; padding: 11px 16px; font-size: 14px;
+    font-family: var(--font-body); color: var(--black); outline: none;
+  }
+  .outlet-search input:focus { border-color: var(--blue); }
+  .outlets-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .outlet-card { background: var(--white); border: 1px solid var(--gray-light); border-radius: 6px; padding: 18px; }
+  .outlet-card-name { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+  .outlet-card-dist { font-size: 12px; color: var(--gray); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+  .outlet-open { color: #059669; }
+  .outlet-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+  .outlet-tag { font-size: 10px; padding: 2px 8px; border-radius: 2px; background: var(--off-white); color: var(--gray); border: 1px solid var(--gray-light); }
+  .outlet-card .btn { width: 100%; justify-content: center; font-size: 12px; padding: 8px; }
+  .outlet-franchise { border: 1.5px dashed var(--gray-light); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; min-height: 160px; }
+  .outlet-franchise-icon { font-size: 28px; }
+  .outlet-franchise-title { font-weight: 500; font-size: 14px; }
+  .outlet-franchise-sub { font-size: 12px; color: var(--gray); }
+
+  /* FOOTER */
+  footer {
+    background: var(--off-black);
+    color: rgba(255,255,255,0.5);
+    padding: 40px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-brand .logo-name .nya { color: var(--white); }
+  .footer-brand .logo-name .maa { color: var(--red); }
+  .footer-brand .logo-tagline { color: rgba(255,255,255,0.3); }
+  .footer-brand p { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.4); margin-top: 12px; }
+  .footer-col h4 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; font-weight: 500; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { background: var(--black); padding: 14px 80px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    section { padding: 48px 24px; }
+    nav { padding: 0 24px; }
+    .hero { grid-template-columns: 1fr; padding: 40px 24px; min-height: auto; }
+    .hero h1 { font-size: 44px; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .grill-grid { grid-template-columns: 1fr; }
+    .chef-grid { grid-template-columns: 1fr; }
+    .fresh-grid { grid-template-columns: repeat(3, 1fr); }
+    .outlets-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { padding: 14px 24px; }
+    .coldchain-bar { padding: 18px 24px; flex-wrap: wrap; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 34px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .fresh-grid { grid-template-columns: repeat(2, 1fr); }
+    .outlets-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-mark" href="#">
+    <svg class="logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Bull/steer head silhouette inspired by the logo -->
+      <path d="M10 28 C6 22, 4 14, 8 10 C12 6, 16 10, 18 16 L22 24" fill="#D81E05"/>
+      <path d="M70 28 C74 22, 76 14, 72 10 C68 6, 64 10, 62 16 L58 24" fill="#D81E05"/>
+      <path d="M22 24 C24 18, 28 14, 32 12 C35 11, 38 11, 40 12 C42 11, 45 11, 48 12 C52 14, 56 18, 58 24 L62 40 L56 58 C52 68, 28 68, 24 58 L18 40 Z" fill="#D81E05"/>
+      <path d="M34 16 C36 14, 38 13, 40 13 C42 13, 44 14, 46 16 L48 22 C46 20, 44 19, 40 19 C36 19, 34 20, 32 22 Z" fill="white" opacity="0.9"/>
+      <ellipse cx="34" cy="32" rx="5" ry="6" fill="white" opacity="0.95"/>
+      <ellipse cx="46" cy="32" rx="5" ry="6" fill="white" opacity="0.95"/>
+      <circle cx="34" cy="33" r="2.5" fill="#0E0E0E"/>
+      <circle cx="46" cy="33" r="2.5" fill="#0E0E0E"/>
+      <path d="M36 46 Q40 50 44 46" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="logo-text">
+      <div class="logo-name"><span class="nya">NYA'</span><span class="maa">MAA</span></div>
+      <div class="logo-tagline">Delectable Maa Country Meat</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#fresh-cuts">Fresh Cuts</a></li>
+    <li><a href="#grill">Grill Packs</a></li>
+    <li><a href="#chef">Chef Service</a></li>
+    <li><a href="#outlets">Outlets</a></li>
+    <li><a href="#trace">Trace My Meat</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#" class="btn btn-outline-white">Sign In</a>
+    <a href="#" class="btn btn-red">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="trace">
+  <div>
+    <div class="hero-badge">Farm-direct · Cold-chain certified · Kimana origin</div>
+    <h1>From <span class="accent">Farm</span><br>To Your <span class="accent-blue">Table</span></h1>
+    <p class="hero-desc">Every Nya'maa cut is traceable from Kimana farm to your kitchen. Scan your pack, see the journey. Real accountability. Real freshness. Country meat done right.</p>
+    <div class="hero-actions">
+      <a href="#grill" class="btn btn-red">Build a Grill Pack</a>
+      <a href="#" class="btn btn-blue">Scan &amp; Trace</a>
+      <a href="#chef" class="btn btn-outline-white">Book a Chef</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50<span>+</span></div>
+        <div class="stat-label">Franchise outlets</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4<span>°C</span></div>
+        <div class="stat-label">Cold chain guaranteed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Traceable to source</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24<span>hr</span></div>
+        <div class="stat-label">Farm to shelf</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trace-card">
+    <div class="trace-card-header">
+      <span class="trace-card-title">Live Traceability</span>
+      <span class="live-badge"><span class="live-dot"></span> Live</span>
+    </div>
+    <div class="batch-code">
+      <span>NM-KIM-240313-B14</span>
+      <span class="batch-hint">Tap to scan ↗</span>
+    </div>
+    <div class="trace-timeline">
+      <div class="trace-step">
+        <div class="trace-step-icon step-done-icon">✓</div>
+        <div class="trace-step-body">
+          <div class="trace-step-title">Slaughtered at Kimana Farm</div>
+          <div class="trace-step-meta">11 Mar 2026 · 05:30 AM · Cert #KA-002</div>
+        </div>
+      </div>
+      <div class="trace-step">
+        <div class="trace-step-icon step-done-icon">✓</div>
+        <div class="trace-step-body">
+          <div class="trace-step-title">Inspected &amp; graded</div>
+          <div class="trace-step-meta">11 Mar · Grade A · Inspector ID: INS-041</div>
+        </div>
+      </div>
+      <div class="trace-step">
+        <div class="trace-step-icon step-done-icon">✓</div>
+        <div class="trace-step-body">
+          <div class="trace-step-title">Cold-chain dispatch (4°C)</div>
+          <div class="trace-step-meta">12 Mar · Fleet truck NM-04</div>
+        </div>
+      </div>
+      <div class="trace-step">
+        <div class="trace-step-icon step-done-icon">✓</div>
+        <div class="trace-step-body">
+          <div class="trace-step-title">Arrived — Westlands Outlet</div>
+          <div class="trace-step-meta">13 Mar · Best by 15 Mar 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLD CHAIN BAR -->
+<div class="coldchain-bar">
+  <div class="coldchain-journey">
+    <div class="cj-step"><div class="cj-icon">🌿</div>Farm</div>
+    <div class="cj-arrow">›</div>
+    <div class="cj-step"><div class="cj-icon">🔬</div>Inspect</div>
+    <div class="cj-arrow">›</div>
+    <div class="cj-step"><div class="cj-icon">❄️</div>Chill</div>
+    <div class="cj-arrow">›</div>
+    <div class="cj-step"><div class="cj-icon">🚛</div>Fleet</div>
+    <div class="cj-arrow">›</div>
+    <div class="cj-step"><div class="cj-icon">🏪</div>Outlet</div>
+    <div class="cj-arrow">›</div>
+    <div class="cj-step"><div class="cj-icon">🍽️</div>You</div>
+  </div>
+  <p class="coldchain-promise"><strong>Nya'maa cold-chain guarantee:</strong> every delivery maintained below 4°C from slaughter to shelf. Temperature logs available on request for every batch code.</p>
+  <div class="temp-badge">≤ 4°C</div>
+</div>
+
+<!-- FEATURES -->
+<section class="features-section" id="fresh-cuts">
+  <div class="section-eyebrow">What makes us different</div>
+  <div class="section-title">The <span class="blue">Nya'maa</span> Online Experience</div>
+  <p class="section-sub">Every feature on this site mirrors the same standards we hold in every outlet — traceable, hygienic, consistent, and built for trust.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="feat-icon">🔍</span>
+      <h3>Scan &amp; Trace</h3>
+      <p>Every pack carries a unique QR code. Scan it to see the farm, slaughter date, inspector certificate, truck number, and outlet arrival — full provenance in seconds.</p>
+      <span class="feat-badge badge-red">Unique to Nya'maa</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🥩</span>
+      <h3>Grill Pack Builder</h3>
+      <p>Choose your protein, marinade, and add-ons. We vacuum-seal and deliver your custom grill-ready pack — perfect for home braais or family gatherings.</p>
+      <span class="feat-badge badge-blue">Most ordered</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">👨‍🍳</span>
+      <h3>Book a Chef</h3>
+      <p>Hire a Nya'maa-certified BBQ chef for your event. They arrive with premium cuts, marinade, and equipment. You just gather the guests.</p>
+      <span class="feat-badge badge-red">New feature</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🌡️</span>
+      <h3>Freshness Dashboard</h3>
+      <p>See live freshness scores for every cut at your nearest outlet — so you know what's at its best before you order or walk in.</p>
+      <span class="feat-badge badge-blue">Only online</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📦</span>
+      <h3>Subscription Boxes</h3>
+      <p>Weekly or bi-weekly fresh cut boxes — customise by protein, portion size, and preferred outlet for collection or home delivery.</p>
+      <span class="feat-badge badge-green">Live now</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🏪</span>
+      <h3>Pre-order &amp; Collect</h3>
+      <p>Find your nearest franchise outlet, check live stock, and reserve your cuts for zero wait-time collection at your convenience.</p>
+      <span class="feat-badge badge-green">Live now</span>
+    </div>
+  </div>
+</section>
+
+<!-- GRILL BUILDER -->
+<section class="grill-section" id="grill">
+  <div class="section-eyebrow">Customise your order</div>
+  <div class="section-title" style="color:white;">Build Your <span style="color:var(--red);">Grill Pack</span></div>
+  <p class="section-sub">Pick your proteins, marinade, and add-ons. Vacuum-sealed and dispatched same day.</p>
+  <div class="grill-grid">
+    <div>
+      <div class="grill-group-label">Select protein</div>
+      <div class="grill-chips" id="proteins">
+        <button class="chip active" data-group="protein" data-label="Beef Ribs" data-price="800">Beef Ribs — KES 800</button>
+        <button class="chip" data-group="protein" data-label="Goat Chops" data-price="650">Goat Chops — KES 650</button>
+        <button class="chip" data-group="protein" data-label="Chicken Wings" data-price="550">Chicken Wings — KES 550</button>
+        <button class="chip" data-group="protein" data-label="Tilapia Fillet" data-price="900">Tilapia Fillet — KES 900</button>
+      </div>
+
+      <div class="grill-group-label">Choose marinade</div>
+      <div class="grill-chips">
+        <button class="chip active" data-group="marinade" data-label="Dry Rub (Classic)" data-price="0">Dry Rub — Free</button>
+        <button class="chip" data-group="marinade" data-label="Peri-Peri" data-price="150">Peri-Peri — KES 150</button>
+        <button class="chip" data-group="marinade" data-label="Garlic &amp; Herb" data-price="150">Garlic &amp; Herb — KES 150</button>
+        <button class="chip" data-group="marinade" data-label="Smoky BBQ" data-price="200">Smoky BBQ — KES 200</button>
+      </div>
+
+      <div class="grill-group-label">Add-ons (select multiple)</div>
+      <div class="grill-chips">
+        <button class="chip" data-group="addon" data-label="Nya'maa Spice Kit" data-price="200">Nya'maa Spice Kit — KES 200</button>
+        <button class="chip" data-group="addon" data-label="Charcoal + Lighter" data-price="350">Charcoal + Lighter — KES 350</button>
+        <button class="chip" data-group="addon" data-label="Dipping Sauces (3)" data-price="280">Dipping Sauces (3) — KES 280</button>
+        <button class="chip" data-group="addon" data-label="Dairy Bundle" data-price="180">Dairy Bundle — KES 180</button>
+        <button class="chip" data-group="addon" data-label="BBQ Tongs &amp; Gloves" data-price="250">BBQ Tongs &amp; Gloves — KES 250</button>
+      </div>
+    </div>
+
+    <div class="grill-summary-card">
+      <div class="gs-title">Your Pack Summary</div>
+      <div class="gs-line"><span>Protein</span><strong id="gs-protein">Beef Ribs</strong></div>
+      <div class="gs-line"><span>Marinade</span><strong id="gs-marinade">Dry Rub (Classic)</strong></div>
+      <div class="gs-line"><span>Add-ons</span><strong id="gs-addons">None</strong></div>
+      <div class="gs-total">
+        <span class="gs-total-label">Estimated total</span>
+        <span class="gs-total-price" id="gs-price">KES 800</span>
+      </div>
+      <button class="btn btn-red" style="width:100%;justify-content:center;margin-top:16px;padding:13px;">Add to Cart →</button>
+      <button class="btn btn-outline-white" style="width:100%;justify-content:center;margin-top:8px;padding:11px;font-size:12px;">Schedule Delivery</button>
+    </div>
+  </div>
+</section>
+
+<!-- FRESHNESS DASHBOARD -->
+<section class="fresh-section">
+  <div class="section-eyebrow">Real-time stock quality</div>
+  <div class="section-title">Freshness <span class="blue">Dashboard</span></div>
+  <p class="section-sub">Live freshness scores for every cut at your nearest outlet, updated with each cold-chain delivery.</p>
+  <div class="fresh-outlet-bar">
+    <span style="font-size:13px;color:var(--gray);">Viewing:</span>
+    <select class="outlet-select">
+      <option>Westlands Outlet</option>
+      <option>Karen Branch</option>
+      <option>Kilimani Branch</option>
+      <option>CBD Outlet</option>
+    </select>
+    <span style="font-size:12px;color:#059669;">● Updated 14 mins ago</span>
+  </div>
+  <div class="fresh-grid">
+    <div class="fresh-card">
+      <h4>Beef Sirloin</h4>
+      <div class="fresh-bar-bg"><div class="fresh-bar" style="width:92%;background:#059669;"></div></div>
+      <div class="pct-green">92% fresh</div>
+      <div class="fresh-date">Slaughtered 12 Mar</div>
+      <div class="status-pill pill-green">In stock</div>
+    </div>
+    <div class="fresh-card">
+      <h4>Goat Leg</h4>
+      <div class="fresh-bar-bg"><div class="fresh-bar" style="width:88%;background:#059669;"></div></div>
+      <div class="pct-green">88% fresh</div>
+      <div class="fresh-date">Slaughtered 12 Mar</div>
+      <div class="status-pill pill-green">In stock</div>
+    </div>
+    <div class="fresh-card">
+      <h4>Chicken Whole</h4>
+      <div class="fresh-bar-bg"><div class="fresh-bar" style="width:72%;background:#D97706;"></div></div>
+      <div class="pct-amber">72% fresh</div>
+      <div class="fresh-date">Slaughtered 11 Mar</div>
+      <div class="status-pill pill-amber">Pre-order next batch</div>
+    </div>
+    <div class="fresh-card">
+      <h4>Tilapia Fillet</h4>
+      <div class="fresh-bar-bg"><div class="fresh-bar" style="width:97%;background:#059669;"></div></div>
+      <div class="pct-green">97% fresh</div>
+      <div class="fresh-date">Harvested 13 Mar</div>
+      <div class="status-pill pill-green">In stock</div>
+    </div>
+    <div class="fresh-card">
+      <h4>Beef Ribs</h4>
+      <div class="fresh-bar-bg"><div class="fresh-bar" style="width:85%;background:#059669;"></div></div>
+      <div class="pct-green">85% fresh</div>
+      <div class="fresh-date">Slaughtered 12 Mar</div>
+      <div class="status-pill pill-green">In stock</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF BOOKING -->
+<section class="chef-section" id="chef">
+  <div class="section-eyebrow">Premium add-on</div>
+  <div class="section-title">Book a <span style="color:rgba(255,255,255,0.55);">Nya'maa</span> Chef</div>
+  <div class="chef-grid">
+    <div>
+      <p style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:24px;">Bring the Nya'maa experience home. Our certified BBQ chefs arrive with premium cuts, your chosen marinade, and all the equipment — you just gather the guests.</p>
+      <div class="chef-perks">
+        <div class="chef-perk"><div class="perk-icon">✓</div>Private home grilling sessions</div>
+        <div class="chef-perk"><div class="perk-icon">✓</div>Corporate event &amp; office catering</div>
+        <div class="chef-perk"><div class="perk-icon">✓</div>Weekend BBQ packages</div>
+        <div class="chef-perk"><div class="perk-icon">✓</div>All meat included, fully branded Nya'maa setup</div>
+        <div class="chef-perk"><div class="perk-icon">✓</div>Custom menus available for dietary needs</div>
+      </div>
+      <a href="#" class="btn btn-outline-white" style="display:inline-flex;">View chef packages →</a>
+    </div>
+    <div class="chef-form">
+      <div>
+        <div class="form-label">Your name</div>
+        <input class="form-input" type="text" placeholder="e.g. Amara Ochieng" />
+      </div>
+      <div>
+        <div class="form-label">Phone number</div>
+        <input class="form-input" type="tel" placeholder="+254 700 000 000" />
+      </div>
+      <div class="form-row">
+        <div>
+          <div class="form-label">Event date</div>
+          <input class="form-input" type="date" />
+        </div>
+        <div>
+          <div class="form-label">Guest count</div>
+          <input class="form-input" type="number" placeholder="20" />
+        </div>
+      </div>
+      <div>
+        <div class="form-label">Location</div>
+        <input class="form-input" type="text" placeholder="e.g. Karen, Nairobi" />
+      </div>
+      <div>
+        <div class="form-label">Package type</div>
+        <select class="form-input">
+          <option>Home BBQ Session</option>
+          <option>Corporate Event</option>
+          <option>Weekend Grill Package</option>
+          <option>Custom – let's discuss</option>
+        </select>
+      </div>
+      <button class="btn btn-red" style="padding:13px;justify-content:center;">Request a Quote →</button>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLETS -->
+<section class="outlets-section" id="outlets">
+  <div class="section-eyebrow">Find your nearest outlet</div>
+  <div class="section-title">Pre-order &amp; <span class="blue">Collect</span></div>
+  <p class="section-sub">Reserve your cuts online — walk in, skip the queue, and collect fresh.</p>
+  <div class="outlet-search">
+    <input type="text" placeholder="Enter your area, e.g. Westlands, Karen…" />
+    <button class="btn btn-blue">Search</button>
+  </div>
+  <div class="outlets-grid">
+    <div class="outlet-card">
+      <div class="outlet-card-name">Westlands Branch</div>
+      <div class="outlet-card-dist">📍 1.2 km · <span class="outlet-open">Open until 8 PM</span></div>
+      <div class="outlet-tags">
+        <span class="outlet-tag">Beef</span>
+        <span class="outlet-tag">Goat</span>
+        <span class="outlet-tag">Fish</span>
+        <span class="outlet-tag">Spices</span>
+      </div>
+      <a href="#" class="btn btn-red">Pre-order here</a>
+    </div>
+    <div class="outlet-card">
+      <div class="outlet-card-name">Karen Branch</div>
+      <div class="outlet-card-dist">📍 3.4 km · <span class="outlet-open">Open until 7 PM</span></div>
+      <div class="outlet-tags">
+        <span class="outlet-tag">Beef</span>
+        <span class="outlet-tag">Chicken</span>
+        <span class="outlet-tag">Dairy</span>
+      </div>
+      <a href="#" class="btn btn-red">Pre-order here</a>
+    </div>
+    <div class="outlet-card">
+      <div class="outlet-card-name">Kilimani Branch</div>
+      <div class="outlet-card-dist">📍 4.1 km · <span class="outlet-open">Open until 8:30 PM</span></div>
+      <div class="outlet-tags">
+        <span class="outlet-tag">All cuts</span>
+        <span class="outlet-tag">BBQ kits</span>
+        <span class="outlet-tag">Grill packs</span>
+      </div>
+      <a href="#" class="btn btn-red">Pre-order here</a>
+    </div>
+    <div class="outlet-card outlet-franchise">
+      <div class="outlet-franchise-icon">🏪</div>
+      <div class="outlet-franchise-title">Open a Nya'maa Outlet</div>
+      <div class="outlet-franchise-sub">Plug-and-play franchise kits available. Bank-financed start-up packages.</div>
+      <a href="#" class="btn btn-outline-red" style="font-size:12px;padding:7px 16px;margin-top:4px;">Learn more</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo-mark">
+      <svg class="logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 28 C6 22, 4 14, 8 10 C12 6, 16 10, 18 16 L22 24" fill="#D81E05"/>
+        <path d="M70 28 C74 22, 76 14, 72 10 C68 6, 64 10, 62 16 L58 24" fill="#D81E05"/>
+        <path d="M22 24 C24 18, 28 14, 32 12 C35 11, 38 11, 40 12 C42 11, 45 11, 48 12 C52 14, 56 18, 58 24 L62 40 L56 58 C52 68, 28 68, 24 58 L18 40 Z" fill="#D81E05"/>
+        <path d="M34 16 C36 14, 38 13, 40 13 C42 13, 44 14, 46 16 L48 22 C46 20, 44 19, 40 19 C36 19, 34 20, 32 22 Z" fill="white" opacity="0.9"/>
+        <ellipse cx="34" cy="32" rx="5" ry="6" fill="white" opacity="0.95"/>
+        <ellipse cx="46" cy="32" rx="5" ry="6" fill="white" opacity="0.95"/>
+        <circle cx="34" cy="33" r="2.5" fill="#0E0E0E"/>
+        <circle cx="46" cy="33" r="2.5" fill="#0E0E0E"/>
+        <path d="M36 46 Q40 50 44 46" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <div class="logo-name"><span class="nya">NYA'</span><span class="maa">MAA</span></div>
+        <div class="logo-tagline">Delectable Maa Country Meat</div>
+      </div>
+    </div>
+    <p>Building the future of trusted, accessible, and modern meat retail across the region. Farm-direct from Kimana since 2024.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Shop</h4>
+    <ul>
+      <li><a href="#">Fresh Cuts</a></li>
+      <li><a href="#">Grill Packs</a></li>
+      <li><a href="#">Convenience Packs</a></li>
+      <li><a href="#">Subscription Boxes</a></li>
+      <li><a href="#">Spices &amp; Dairy</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#">Book a Chef</a></li>
+      <li><a href="#">BBQ Events</a></li>
+      <li><a href="#">Scan &amp; Trace</a></li>
+      <li><a href="#">Pre-order &amp; Collect</a></li>
+      <li><a href="#">Franchise Info</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About Nya'maa</a></li>
+      <li><a href="#">Kimana Farm</a></li>
+      <li><a href="#">Partner Farms</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Nya'maa Meats Ltd. All rights reserved.</span>
+  <span>Farm-to-fork · Kimana, Kenya</span>
+  <span><a href="#">Privacy Policy</a> · <a href="#">Terms</a></span>
+</div>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const state = { protein: 800, marinade: 0, addons: [] };
+  const addonLabels = [];
+
+  function updateSummary() {
+    const addonTotal = state.addons.reduce((s, a) => s + a.price, 0);
+    const total = state.protein + state.marinade + addonTotal;
+    document.getElementById('gs-price').textContent = 'KES ' + total.toLocaleString();
+    document.getElementById('gs-addons').textContent = state.addons.length ? state.addons.map(a => a.label).join(', ') : 'None';
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const group = chip.dataset.group;
+      const price = parseInt(chip.dataset.price);
+      const label = chip.dataset.label;
+
+      if (group === 'addon') {
+        chip.classList.toggle('active');
+        const idx = state.addons.findIndex(a => a.label === label);
+        if (idx > -1) state.addons.splice(idx, 1);
+        else state.addons.push({ label, price });
+      } else {
+        document.querySelectorAll(`[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        state[group] = price;
+        if (group === 'protein') document.getElementById('gs-protein').textContent = label;
+        if (group === 'marinade') document.getElementById('gs-marinade').textContent = label;
+      }
+      updateSummary();
+    });
+  });
+</script>
+</body>
+</html>
