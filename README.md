@@ -1,2 +1,2 @@
 # nyamaa
-Redefining the meat retail experience by solving a critical gap in the butchery market; access to clean, professionally run, consistently superb quality and trusted meat outlets. 
+Great meat starts long before the grill. It starts at a farm you can trace, a cut you can trust, and a butchery that treats quality as a non-negotiable. Welcome to Nya'maa — meat the way it should be
